@@ -236,20 +236,20 @@ def register_toolkit(toolkit_name: str, api_keys: Optional[Dict[str, str]] = Non
                 # Skip tools without a callable function
                 continue
         
-        # Get the function signature to preserve parameter names
-        sig = inspect.signature(function)
-        
         # Create a properly wrapped function that preserves the signature
-        @functools.wraps(function)
-        def wrapped_function(*args, **kwargs):
-            # Remove any unexpected keyword arguments like 'args' if present
-            # and not in the function signature
-            if 'args' in kwargs and 'args' not in sig.parameters:
-                del kwargs['args']
-            return function(*args, **kwargs)
-        
-        # Register the function with MCP
-        mcp.tool()(wrapped_function)
+        def create_wrapped_tool(func):
+            sig = inspect.signature(func)
+
+            @functools.wraps(func)
+            def wrapped_function(*args, **kwargs):
+                if 'args' in kwargs and 'args' not in sig.parameters:
+                    del kwargs['args']
+                return func(*args, **kwargs)
+            
+            return wrapped_function
+
+        wrapped_function = create_wrapped_tool(function)
+        mcp.tool(name=function_name)(wrapped_function)
         
         # Get the description from the docstring
         doc = function.__doc__ or "No description available"

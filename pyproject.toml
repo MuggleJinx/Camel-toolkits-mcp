@@ -1,9 +1,17 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "camel-toolkits-mcp"
 version = "0.1.0"
-description = "Add your description here"
+description = "A server that exports Camel toolkits as MCP-compatible tools"
+authors = [
+    {name = "Xiaotian Jin", email = "jin.xiaotian.kim@gmail.com"}
+]
+license = "MIT"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.10"
 dependencies = [
     "camel-ai>=0.2.58",
     "mcp[cli]>=1.8.1",
@@ -13,6 +21,38 @@ dependencies = [
     "pyowm>=3.3.0",
     "pyyaml>=6.0.2",
     "requests-oauthlib>=2.0.0",
-    "setuptools>=80.4.0",
     "sqlalchemy>=2.0.40",
 ]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+    "ignore::PendingDeprecationWarning",
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py39"]
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+
+[tool.coverage.run]
+source = ["."]
+omit = ["tests/*", "setup.py"]
+
+[tool.setuptools]
+py-modules = ["router", "server"]
