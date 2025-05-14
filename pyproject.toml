@@ -1,0 +1,18 @@
+[project]
+name = "camel-toolkits-mcp"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "camel-ai>=0.2.58",
+    "mcp[cli]>=1.8.1",
+    "numpy>=2.2.5",
+    "pandas>=2.2.3",
+    "pillow>=11.2.1",
+    "pyowm>=3.3.0",
+    "pyyaml>=6.0.2",
+    "requests-oauthlib>=2.0.0",
+    "setuptools>=80.4.0",
+    "sqlalchemy>=2.0.40",
+]
