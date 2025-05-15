@@ -3,9 +3,9 @@
 from unittest import mock
 
 from camel_toolkits_mcp.router import (
-    get_tool_name, 
-    execute_toolkit_function, 
-    list_toolkit_functions
+    get_tool_name,
+    execute_toolkit_function,
+    list_toolkit_functions,
 )
 
 
@@ -77,21 +77,20 @@ def test_execute_toolkit_function():
     """Test execute_toolkit_function."""
     # Check if the SearchToolkit exists and what functions it has
     functions_result = list_toolkit_functions("SearchToolkit")
-    
+
     # If the toolkit doesn't exist, skip this test
     if "error" in functions_result:
         return
-    
+
     # Try to find wiki search functions
     functions = functions_result.get("functions", {})
     wiki_functions = [
-        name for name, info in functions.items() 
-        if "wiki" in name.lower()
+        name for name, info in functions.items() if "wiki" in name.lower()
     ]
-    
+
     # If wiki function found, use it; otherwise default to search_wiki
     function_name = wiki_functions[0] if wiki_functions else "search_wiki"
-    
+
     # Execute the function with a test entity
     result = execute_toolkit_function(
         "SearchToolkit",
@@ -99,8 +98,7 @@ def test_execute_toolkit_function():
         {},
         {"entity": "alan turing"},
     )
-    
+
     # It might succeed or fail depending on environment,
     # just make sure it returns something
     assert isinstance(result, dict)
-
