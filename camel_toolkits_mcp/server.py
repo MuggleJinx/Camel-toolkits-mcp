@@ -3,7 +3,6 @@
 Camel Toolkits MCP Server - Exposes Camel toolkits as MCP-compatible tools.
 """
 
-import os
 import logging
 from camel_toolkits_mcp.router import mcp
 
@@ -15,5 +14,11 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-if __name__ == "__main__":
+def main():
+    """Run the Camel Toolkits MCP server."""
     mcp.run("stdio")
+    return 0
+
+
+if __name__ == "__main__":
+    main()
