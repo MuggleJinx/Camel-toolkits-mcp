@@ -8,8 +8,7 @@ This project bridges the gap between the Camel AI framework's toolkit ecosystem 
 
 Key features:
 - Dynamically discover and list available Camel toolkits
-- Load and register toolkits at runtime with a simple API
-- Automatic detection and handling of required API keys
+- Load and execute toolkit functions at runtime
 - Seamless conversion of Camel toolkit functions to MCP-compatible tools
 
 ## Installation
@@ -28,23 +27,11 @@ cd camel-toolkits-mcp
 pip install -e .
 ```
 
-## Usage
+## Config with MCP clients
 
-Start the server:
+### Using with uvx
 
-```bash
-python -m camel_toolkits_mcp
-```
-
-This will start an MCP server that exposes the following tools:
-
-- `get_toolkits_list()`: Lists all available Camel toolkits
-- `register_toolkit()`: Registers a toolkit by name
-- `get_toolkit_info()`: Gets information about a toolkit's parameters
-
-### Using with UVX
-
-You can easily configure UVX to run the Camel toolkits server in your `.uvx.json` file:
+You can easily configure uvx to run the Camel toolkits server like this:
 
 ```json
 {
@@ -56,40 +43,39 @@ You can easily configure UVX to run the Camel toolkits server in your `.uvx.json
       ],
       "env": {
         "OPENAI_API_KEY": "your-openai-key",
-        "NOTION_TOKEN": "your-notion-token"
+        "NOTION_TOKEN": "your-notion-token",
+        "..." : "..."
       }
     }
   }
 }
 ```
 
-This configuration will automatically launch the Camel toolkits server when starting UVX.
+## Available Tools
 
-### Example: Using Notion Toolkit
+The server exposes the following MCP-compatible tools:
+
+- `get_toolkits_list()`: Lists all available Camel toolkits with their descriptions
+- `list_toolkit_functions(toolkit_name, include_methods=True)`: Lists all functions available in a specific toolkit
+- `execute_toolkit_function(toolkit_name, function_name, toolkit_params=None, function_args=None)`: Executes a specific function from a toolkit
+
+### Example: Using Tools
 
 ```python
 # First, discover available toolkits
-toolkits = get_toolkits()
-print(toolkits)  # Shows all available toolkits including NotionToolkit
+toolkits = get_toolkits_list()
+print(toolkits)  # Shows all available toolkits
 
-# Register the Notion toolkit
-result = register_toolkit("NotionToolkit")
+# List functions in a specific toolkit (e.g., NotionToolkit)
+functions = list_toolkit_functions(toolkit_name="NotionToolkit")
 
-# If API keys are required, you'll get a response like:
-# {
-#   "status": "missing_api_keys",
-#   "toolkit": "NotionToolkit",
-#   "missing_keys": ["NOTION_TOKEN"],
-#   "message": "Missing required API keys: NOTION_TOKEN. Please provide these keys to register the toolkit."
-# }
-
-# Register with API keys:
-result = register_toolkit(
-    "NotionToolkit", 
-    api_keys={"NOTION_TOKEN": "your_notion_api_key"}
+# Execute a toolkit function
+result = execute_toolkit_function(
+    toolkit_name="NotionToolkit",
+    function_name="search_pages",
+    toolkit_params={"notion_token": "your-notion-token"},
+    function_args={"query": "meeting notes"}
 )
-
-# Now all Notion toolkit tools are available for use through MCP
 ```
 
 ## Architecture
@@ -110,10 +96,7 @@ This server supports all toolkits in the Camel framework, including:
 
 ## API Key Management
 
-For toolkits requiring API keys (like Notion, OpenAI, etc.), you can provide them in two ways:
-
-1. Set in environment variables before starting the server
-2. Provide them directly when calling `register_toolkit`
+For toolkits requiring API keys (like Notion, OpenAI, etc.), you should provide them in the environment variables when configuring the MCP server.
 
 ## Development
 
