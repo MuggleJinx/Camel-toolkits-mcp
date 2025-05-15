@@ -42,6 +42,29 @@ This will start an MCP server that exposes the following tools:
 - `register_toolkit()`: Registers a toolkit by name
 - `get_toolkit_info()`: Gets information about a toolkit's parameters
 
+### Using with UVX
+
+You can easily configure UVX to run the Camel toolkits server in your `.uvx.json` file:
+
+```json
+{
+  "mcpServers": {
+    "camel-toolkits": {
+      "command": "uvx",
+      "args": [
+        "camel-toolkits-mcp"
+      ],
+      "env": {
+        "OPENAI_API_KEY": "your-openai-key",
+        "NOTION_TOKEN": "your-notion-token"
+      }
+    }
+  }
+}
+```
+
+This configuration will automatically launch the Camel toolkits server when starting UVX.
+
 ### Example: Using Notion Toolkit
 
 ```python

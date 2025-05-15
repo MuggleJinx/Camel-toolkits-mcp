@@ -6,4 +6,4 @@ import sys
 from camel_toolkits_mcp.server import main
 
 if __name__ == "__main__":
-    sys.exit(main()) 
+    sys.exit(main())
