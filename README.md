@@ -14,27 +14,33 @@ Key features:
 
 ## Installation
 
-```bash
-# Clone the repository
-git clone https://github.com/yourusername/camel-toolkits-mcp.git
-cd camel-toolkits-mcp
+You can install the package directly from PyPI:
 
-# Install dependencies
-pip install -r requirements.txt
+```bash
+pip install camel-toolkits-mcp
+```
+
+Or install from source:
+
+```bash
+git clone https://github.com/jinx0a/camel-toolkits-mcp.git
+cd camel-toolkits-mcp
+pip install -e .
 ```
 
 ## Usage
 
-### Starting the Server
+Start the server:
 
 ```bash
-python server.py
+python -m camel_toolkits_mcp
 ```
 
-This will start the MCP server, which exposes two main tools:
+This will start an MCP server that exposes the following tools:
 
-1. `get_toolkits()` - Lists all available toolkits in the Camel framework
-2. `register_toolkit(toolkit_name, api_keys)` - Loads a specific toolkit and registers its tools
+- `get_toolkits_list()`: Lists all available Camel toolkits
+- `register_toolkit()`: Registers a toolkit by name
+- `get_toolkit_info()`: Gets information about a toolkit's parameters
 
 ### Example: Using Notion Toolkit
 
@@ -86,9 +92,32 @@ For toolkits requiring API keys (like Notion, OpenAI, etc.), you can provide the
 1. Set in environment variables before starting the server
 2. Provide them directly when calling `register_toolkit`
 
+## Development
+
+To set up a development environment:
+
+```bash
+pip install -e ".[dev]"
+```
+
+Run tests:
+
+```bash
+pytest
+```
+
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! The project uses GitHub Actions for CI/CD:
+
+1. Tests are run automatically on pull requests
+2. New releases are automatically published to PyPI when a GitHub release is created
+
+To publish a new version:
+
+1. Update the version in `camel_toolkits_mcp/__init__.py`
+2. Create a new GitHub release with a tag like `v0.1.0`
+3. The GitHub workflow will automatically build and publish to PyPI
 
 ## License
 
