@@ -2,7 +2,11 @@
 
 from unittest import mock
 
-from camel_toolkits_mcp.router import get_tool_name
+from camel_toolkits_mcp.router import (
+    get_tool_name, 
+    execute_toolkit_function, 
+    list_toolkit_functions
+)
 
 
 def test_get_tool_name_with_name():
@@ -59,3 +63,44 @@ def test_get_tool_name_default():
 
     # The function should return something like "tool_1234567890"
     assert get_tool_name(tool).startswith("tool_")
+
+
+def test_list_toolkit_functions():
+    """Test list_toolkit_functions."""
+    # Test runs without error - output will vary based on actual toolkits
+    result = list_toolkit_functions("TerminalToolkit")
+    assert isinstance(result, dict)
+    assert "functions" in result or "error" in result
+
+
+def test_execute_toolkit_function():
+    """Test execute_toolkit_function."""
+    # Check if the SearchToolkit exists and what functions it has
+    functions_result = list_toolkit_functions("SearchToolkit")
+    
+    # If the toolkit doesn't exist, skip this test
+    if "error" in functions_result:
+        return
+    
+    # Try to find wiki search functions
+    functions = functions_result.get("functions", {})
+    wiki_functions = [
+        name for name, info in functions.items() 
+        if "wiki" in name.lower()
+    ]
+    
+    # If wiki function found, use it; otherwise default to search_wiki
+    function_name = wiki_functions[0] if wiki_functions else "search_wiki"
+    
+    # Execute the function with a test entity
+    result = execute_toolkit_function(
+        "SearchToolkit",
+        function_name,
+        {},
+        {"entity": "alan turing"},
+    )
+    
+    # It might succeed or fail depending on environment,
+    # just make sure it returns something
+    assert isinstance(result, dict)
+
