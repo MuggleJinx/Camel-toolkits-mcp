@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "camel-toolkits-mcp"
-version = "0.1.0"
+version = "0.1.1"
 description = "A server that exports Camel toolkits as MCP-compatible tools"
 authors = [
     {name = "Xiaotian Jin", email = "jin.xiaotian.kim@gmail.com"}

@@ -119,12 +119,6 @@ Contributions are welcome! The project uses GitHub Actions for CI/CD:
 1. Tests are run automatically on pull requests
 2. New releases are automatically published to PyPI when a GitHub release is created
 
-To publish a new version:
-
-1. Update the version in `camel_toolkits_mcp/__init__.py`
-2. Create a new GitHub release with a tag like `v0.1.0`
-3. The GitHub workflow will automatically build and publish to PyPI
-
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
