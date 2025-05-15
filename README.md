@@ -51,6 +51,28 @@ You can easily configure uvx to run the Camel toolkits server like this:
 }
 ```
 
+### Local Development Configuration
+
+If you're developing this package locally, you can configure UVX to use your development version:
+
+```json
+{
+  "mcpServers": {
+    "camel_toolkits_mcp": {
+      "command": "/path/to/python",
+      "args": [
+        "/path/to/camel_toolkits_mcp/server.py"
+      ],
+      "env": {
+        "OPENAI_API_KEY": "your-openai-key",
+        "NOTION_TOKEN": "your-notion-token",
+        "..." : "..."
+      }
+    }
+  }
+}
+```
+
 ## Available Tools
 
 The server exposes the following MCP-compatible tools:
@@ -84,7 +106,7 @@ The router works by:
 1. Scanning the Camel framework's toolkit directory
 2. Analyzing each toolkit class to detect its tools and API requirements
 3. Creating proper MCP-compatible wrappers for each tool function
-4. Registering these wrappers with the FastMCP server
+4. Exposing these functions through the FastMCP server
 
 ## Supported Toolkits
 
