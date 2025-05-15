@@ -7,7 +7,7 @@ name = "camel-toolkits-mcp"
 version = "0.1.2"
 description = "A server that exports Camel toolkits as MCP-compatible tools"
 authors = [
-    {name = "Xiaotian Jin", email = "jin.xiaotian.kim@gmail.com"}
+    {name = "Xiaotian Jin", email = "xiaotian.jin@eigent.ai"}
 ]
 license = {text = "MIT"}
 readme = "README.md"
@@ -15,27 +15,67 @@ requires-python = ">=3.10"
 dependencies = [
     "camel-ai>=0.2.58",
     "mcp[cli]>=1.8.1",
-    "numpy>=2.2.5",
-    "pandas>=2.2.3",
-    "pillow>=11.2.1",
-    "pyowm>=3.3.0",
-    "pyyaml>=6.0.2",
-    "requests-oauthlib>=2.0.0",
-    "sqlalchemy>=2.0.40",
-]
-classifiers = [
-    "Development Status :: 4 - Beta",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.10",
-    "Programming Language :: Python :: 3.11",
-    "Programming Language :: Python :: 3.12",
-    "Topic :: Software Development :: Libraries :: Python Modules",
+    "numpy",
+    "beautifulsoup4>=4,<5",
+    "docx2txt>=0.8,<0.9",
+    "PyMuPDF>=1.22.5,<2",
+    "unstructured==0.16.20",
+    "pandasai>=2.3.0,<3",
+    "wikipedia>=1,<2",
+    "linkup-sdk>=0.2.1,<0.3",
+    "duckduckgo-search>=6.3.5,<7",
+    "newspaper3k>=0.2.8,<0.3",
+    "wolframalpha>=5.0.0,<6",
+    "sympy>=1.13.3,<2",
+    "pyowm>=3.3.0,<4",
+    "googlemaps>=4.10.0,<5",
+    "google-api-python-client==2.166.0",
+    "google-auth-httplib2==0.2.0",
+    "google-auth-oauthlib==1.2.1",
+    "requests_oauthlib>=1.3.1,<2",
+    "fastapi>=0.115.11",
+    "rouge>=1.0.1,<2",
+    "e2b-code-interpreter>=1.0.3,<2",
+    "firecrawl-py>=1.0.0,<2",
+    "arxiv>=2.1.3,<3",
+    "arxiv2text>=0.1.14,<0.2",
+    "imageio[pyav]>=2.34.2,<3",
+    "pillow>=10.1.0,<11.0.0",
+    "slack-sdk>=3.27.2,<4",
+    "slack-bolt>=1.20.1,<2",
+    "pygithub>=2.6.0,<3",
+    "discord.py>=2.3.2,<3",
+    "scholarly==1.7.11",
+    "notion-client>=2.2.1,<3",
+    "yt-dlp>=2024.11.4,<2025",
+    "ffmpeg-python>=0.2.0,<0.3",
+    "datacommons>=1.4.3,<2",
+    "datacommons_pandas>=0.0.3,<0.0.4",
+    "tavily-python>=0.5.0,<0.6",
+    "apify_client>=1.8.1,<2",
+    "stripe>=11.3.0,<12",
+    "pandas>=1.5.3,<2",
+    "tree-sitter-python>=0.23.6,<0.24",
+    "tree-sitter>=0.23.2,<0.24",
+    "networkx>=3.4.2,<4",
+    "rank-bm25>=0.2.2,<0.3",
+    "litellm>=1.38.1,<2",
+    "anthropic>=0.47.0,<0.50.0",
+    "playwright>=1.50.0",
+    "html2text>=2024.2.26",
+    "docx>=0.2.4",
+    "fpdf>=1.7.2",
+    "typer>=0.15.2",
+    "mem0ai>=0.1.67",
+    "math-verify>=0.7.0,<0.8",
+    "exa-py>=1.10.0,<2",
+    "crawl4ai>=0.3.745",
+    "pyautogui>=0.9.54,<0.10",
+    "google-genai>=1.13.0",
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/MuggleJinx/Camel-toolkits-mcp"
+Homepage = "https://github.com/MuggleJinx/Camel-toolkits-mcp"
 "Bug Tracker" = "https://github.com/MuggleJinx/Camel-toolkits-mcp/issues"
 
 [project.optional-dependencies]
