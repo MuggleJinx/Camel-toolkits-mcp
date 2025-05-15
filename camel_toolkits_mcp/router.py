@@ -439,9 +439,27 @@ def list_toolkit_functions(toolkit_name: str, include_methods: bool = True):
         # Try to get function info
         if isinstance(tool, FunctionTool):
             doc = tool.func.__doc__ or "No description available"
+            
+            # Get parameter information
+            params = {}
+            try:
+                signature = inspect.signature(tool.func)
+                for param_name, param in signature.parameters.items():
+                    if param_name == 'self':
+                        continue
+                    params[param_name] = {
+                        "required": param.default == param.empty,
+                        "default": None if param.default == param.empty else param.default,
+                        "type": str(param.annotation) if param.annotation != param.empty else "unknown"
+                    }
+            except Exception:
+                # If we can't get signature, create empty params dict
+                pass
+                
             functions[name] = {
                 "type": "tool",
-                "description": doc.strip()
+                "description": doc.strip(),
+                "parameters": params
             }
         else:
             functions[name] = {
@@ -463,9 +481,27 @@ def list_toolkit_functions(toolkit_name: str, include_methods: bool = True):
             # Add methods defined directly on the toolkit
             if inspect.ismethod(member):
                 doc = member.__doc__ or "No description available"
+                
+                # Get parameter information
+                params = {}
+                try:
+                    signature = inspect.signature(member)
+                    for param_name, param in list(signature.parameters.items()):
+                        if param_name == 'self':
+                            continue
+                        params[param_name] = {
+                            "required": param.default == param.empty,
+                            "default": None if param.default == param.empty else param.default,
+                            "type": str(param.annotation) if param.annotation != param.empty else "unknown"
+                        }
+                except Exception:
+                    # If we can't get signature, create empty params dict
+                    pass
+                
                 functions[name] = {
                     "type": "method",
-                    "description": doc.strip()
+                    "description": doc.strip(),
+                    "parameters": params
                 }
     
     return {
