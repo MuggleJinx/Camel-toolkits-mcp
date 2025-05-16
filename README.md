@@ -1,15 +1,15 @@
-# Camel Toolkits MCP
+# CAMEL Toolkits MCP
 
-A lightweight server that exports [Camel](https://github.com/camel-ai/camel) framework toolkits as MCP-compatible tools.
+A lightweight server that exports [CAMEL](https://github.com/camel-ai/camel) framework toolkits as MCP-compatible tools.
 
 ## Overview
 
-This project bridges the gap between the Camel AI framework's toolkit ecosystem and MCP (Model Control Protocol) compatible clients. It allows you to dynamically load and expose any Camel toolkit as an MCP server, making these tools available to a wide range of LLM-based applications.
+This project bridges the gap between the CAMEL AI framework's toolkit ecosystem and MCP (Model Control Protocol) compatible clients. It allows you to dynamically load and expose any Camel toolkit as an MCP server, making these tools available to a wide range of LLM-based applications.
 
 Key features:
-- Dynamically discover and list available Camel toolkits
+- Dynamically discover and list available CAMEL toolkits
 - Load and execute toolkit functions at runtime
-- Seamless conversion of Camel toolkit functions to MCP-compatible tools
+- Seamless conversion of CAMEL toolkit functions to MCP-compatible tools
 
 ## Installation
 
@@ -31,7 +31,7 @@ pip install -e .
 
 ### Using with uvx
 
-You can easily configure uvx to run the Camel toolkits server like this:
+You can easily configure uvx to run the CAMEL toolkits server like this:
 
 ```json
 {
@@ -77,7 +77,7 @@ If you're developing this package locally, you can configure UVX to use your dev
 
 The server exposes the following MCP-compatible tools:
 
-- `get_toolkits_list()`: Lists all available Camel toolkits with their descriptions
+- `get_toolkits_list()`: Lists all available CAMEL toolkits with their descriptions
 - `list_toolkit_functions(toolkit_name, include_methods=True)`: Lists all functions available in a specific toolkit
 - `execute_toolkit_function(toolkit_name, function_name, toolkit_params=None, function_args=None)`: Executes a specific function from a toolkit
 
@@ -103,14 +103,14 @@ result = execute_toolkit_function(
 ## Architecture
 
 The router works by:
-1. Scanning the Camel framework's toolkit directory
+1. Scanning the CAMEL framework's toolkit directory
 2. Analyzing each toolkit class to detect its tools and API requirements
 3. Creating proper MCP-compatible wrappers for each tool function
 4. Exposing these functions through the FastMCP server
 
 ## Supported Toolkits
 
-This server supports all toolkits in the Camel framework, including:
+This server supports all toolkits in the CAMEL framework, including:
 - NotionToolkit
 - OpenAIToolkit
 - WebSearchToolkit
